@@ -19,6 +19,7 @@
  */
 
 #include <stdlib.h>
+#include <string.h>
 #include <dbus/dbus.h>
 #include <dbus/dbus-glib.h>
 #include <dbus/dbus-glib-lowlevel.h>
@@ -115,7 +116,7 @@ master_filter_cb (DBusConnection *conn,
   guint32 serial;
 
   if (!dbus_conn)
-    return;
+    return DBUS_HANDLER_RESULT_HANDLED;
 
   if (verbose)
     g_print ("New message from server: type='%d' path='%s' iface='%s'"
@@ -224,9 +225,6 @@ main (int argc, char *argv[])
   int i;
   GError *error = NULL;
   GMainLoop *mainloop = NULL;
-
-
-  g_type_init ();
 
   for (i = 1; i < argc; i++)
   {
